@@ -1,6 +1,6 @@
 // importing other stuff, utility functions for:
 // working with supabase:
-import { checkAuth, signOutUser, getGroceryList } from './fetch-utils.js';
+import { checkAuth, signOutUser, getGroceryList, addGroceryItem } from './fetch-utils.js';
 import { renderDemGroceries } from './render-utils.js';
 
 
@@ -20,7 +20,7 @@ signOutLink.addEventListener('click', signOutUser);
 // grab needed DOM elements on page:
 
 const groceryListEl = document.querySelector('.groceries');
-// const groceryForm = document.querySelector('.grocery-form');
+const groceryForm = document.querySelector('.grocery-form');
 
 // local state:
 
@@ -42,5 +42,19 @@ async function loadPage() {
     }
 }
 
-loadPage();
+
+
 // events:
+
+groceryForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(groceryForm);
+    await addGroceryItem({
+        item: formData.get('grocery'),
+        quantity: formData.get('quantity'),
+    });
+    groceryForm.reset();
+    displayGroceries();
+});
+
+loadPage();

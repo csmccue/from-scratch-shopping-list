@@ -47,9 +47,13 @@ export async function signOutUser() {
 export async function getGroceryList() {
     // debugger
     const response = await client.from('groceries').select('*').order('id');
-    console.log(response);
     return checkError(response);
 
+}
+
+export async function addGroceryItem(item) {
+    const response = await client.from('groceries').insert(item).single();
+    return checkError(response);
 }
 
 /* check error function from marty */

@@ -12,6 +12,5 @@ export function renderDemGroceries(groceries) {
         }
         div.append(li);
     }
-    console.log(div);
     return div;
 }
