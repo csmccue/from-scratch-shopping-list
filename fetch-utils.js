@@ -56,6 +56,11 @@ export async function addGroceryItem(item) {
     return checkError(response);
 }
 
+export async function deleteGroceryList() {
+    const response = await client.from('groceries').delete().match({ user_id: client.auth.user().id });
+    return checkError(response);
+}
+
 /* check error function from marty */
 
 function checkError({ data, error }) {

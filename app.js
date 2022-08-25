@@ -1,6 +1,6 @@
 // importing other stuff, utility functions for:
 // working with supabase:
-import { checkAuth, signOutUser, getGroceryList, addGroceryItem } from './fetch-utils.js';
+import { checkAuth, signOutUser, getGroceryList, addGroceryItem, deleteGroceryList } from './fetch-utils.js';
 import { renderDemGroceries } from './render-utils.js';
 
 
@@ -21,6 +21,7 @@ signOutLink.addEventListener('click', signOutUser);
 
 const groceryListEl = document.querySelector('.groceries');
 const groceryForm = document.querySelector('.grocery-form');
+const deleteButton = document.querySelector('.delete-button');
 
 // local state:
 
@@ -54,6 +55,11 @@ groceryForm.addEventListener('submit', async (e) => {
         quantity: formData.get('quantity'),
     });
     groceryForm.reset();
+    displayGroceries();
+});
+
+deleteButton.addEventListener('click', async () => {
+    await deleteGroceryList();
     displayGroceries();
 });
 
