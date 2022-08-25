@@ -24,7 +24,7 @@ const groceryForm = document.querySelector('.grocery-form');
 const deleteButton = document.querySelector('.delete-button');
 
 // local state:
-
+// adding so i can trash supa
 // display functions:
 
 async function displayGroceries() {
