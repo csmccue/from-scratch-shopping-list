@@ -1,8 +1,7 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://xnwqsbmekrohmjrqulao.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inhud3FzYm1la3JvaG1qcnF1bGFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NTk2MzkyNTgsImV4cCI6MTk3NTIxNTI1OH0.A9jwVzQJOXoOYRe3CtCtSj6B30yywT0bXU8EkVXZq4k';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
 /* Auth related functions */
 
 export function getUser() {
@@ -43,3 +42,27 @@ export async function signOutUser() {
 }
 
 /* Data functions */
+
+// gimme those groceries
+export async function getGroceryList() {
+    // debugger
+    const response = await client.from('groceries').select('*').order('id');
+    return checkError(response);
+
+}
+
+export async function addGroceryItem(item) {
+    const response = await client.from('groceries').insert(item).single();
+    return checkError(response);
+}
+
+export async function deleteGroceryList() {
+    const response = await client.from('groceries').delete().match({ user_id: client.auth.user().id });
+    return checkError(response);
+}
+
+/* check error function from marty */
+
+function checkError({ data, error }) {
+    return error ? console.error(error) : data;
+}
