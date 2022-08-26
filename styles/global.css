@@ -53,7 +53,7 @@ footer {
     background-color: var(--footer-background);
 }
 
-.bought {
+.purchased {
     text-decoration: line-through;
     background-color: lightgreen;
 }
